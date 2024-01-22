@@ -47,4 +47,6 @@ function fetchWeatherData(city) {
   
   // Call the initMap function when the page loads
   document.addEventListener('DOMContentLoaded', initMap);
+
+  
   

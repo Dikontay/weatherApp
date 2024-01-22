@@ -72,5 +72,35 @@ res.json({
     });
 });
 
+app.get('/forecast', (req, res) => {
+    const city = req.query.city;
+    const apiKey = process.env.WEATHERBIT_API_KEY; // Your API Key from Weatherbit
+    const forecastUrl = `https://api.weatherbit.io/v2.0/forecast/daily?city=${encodeURIComponent(city)}&key=${apiKey}&days=10`;
+
+    https.get(forecastUrl, (apiResponse) => {
+        let dataChunks = [];
+        
+        apiResponse.on('data', (chunk) => {
+            dataChunks.push(chunk);
+        });
+
+        apiResponse.on('end', () => {
+            if (apiResponse.statusCode === 200) {
+                const body = Buffer.concat(dataChunks);
+                const forecastData = JSON.parse(body.toString());
+                // Send the forecast data to the frontend
+                res.json(forecastData);
+            } else {
+                // Handle HTTP response codes other than 200
+                res.status(apiResponse.statusCode).send('Error fetching forecast data');
+            }
+        });
+        
+    }).on('error', (e) => {
+        console.error(`Got an error: ${e.message}`);
+        res.status(500).send('Error fetching forecast data');
+    });
+});
+
 // Start the server
 app.listen(port, () => console.log(`Listening on http://localhost:${port}/`));
