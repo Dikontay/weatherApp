@@ -16,8 +16,11 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+var city_input 
+
 app.get('/weather', (req, res) => {
     const city = req.query.city;
+    city_input=city
     const apiKey = process.env.OPENWEATHERMAP_API_KEY; // Make sure you have this in your .env file
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
@@ -73,9 +76,9 @@ res.json({
 });
 
 app.get('/forecast', (req, res) => {
-    const city = req.query.city;
+   
     const apiKey = process.env.WEATHERBIT_API_KEY; // Your API Key from Weatherbit
-    const forecastUrl = `https://api.weatherbit.io/v2.0/forecast/daily?city=${encodeURIComponent(city)}&key=${apiKey}&days=10`;
+    const forecastUrl = `https://api.weatherbit.io/v2.0/forecast/daily?city=${encodeURIComponent(city_input)}&key=${apiKey}&days=10`;
 
     https.get(forecastUrl, (apiResponse) => {
         let dataChunks = [];
@@ -100,6 +103,10 @@ app.get('/forecast', (req, res) => {
         console.error(`Got an error: ${e.message}`);
         res.status(500).send('Error fetching forecast data');
     });
+});
+
+app.get('/forecast-page', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'forecast.html'));
 });
 
 // Start the server
