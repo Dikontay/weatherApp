@@ -64,7 +64,7 @@ res.json({
     latitude: latitude,
     longitude: longitude
   });
-  
+
         });
     }).on('error', function(e) {
         console.error(`Got an error: ${e.message}`);

@@ -1,3 +1,13 @@
+document.addEventListener('DOMContentLoaded', function() {
+    initMap(); // Initialize the map when the page loads
+  
+    document.getElementById('form-input').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevents the default form submit action
+      var city = document.getElementById('city-input').value;
+      fetchWeatherData(city);
+    });
+  });
+  
 // This function should be called when the user submits the form with the city name
 function fetchWeatherData(city) {
     fetch(`/weather?city=${city}`)
