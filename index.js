@@ -18,13 +18,13 @@ app.get('/', (req, res) => {
 
 app.use(bodyParser.urlencoded({extended : true}))
 
-// app.get('/weather', (req, res)=>{res.sendFile(templatePath.join(__dirname + '/index.html'))})
+app.use(express.static('public'));
 
 
 app.get('/weather', (req, res) => {
     const city = req.query.city;
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=23ba82411c0aea65da3417ff3d608859&units=metric`;
-    console.log(city)
+    
     https.get(url, function(response) {
         response.on("data", function(data) {
             const weatherData = JSON.parse(data);
