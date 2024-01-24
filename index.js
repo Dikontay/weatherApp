@@ -21,7 +21,7 @@ var city_input
 app.get('/weather', (req, res) => {
     const city = req.query.city;
     city_input=city
-    const apiKey = process.env.OPENWEATHERMAP_API_KEY; // Make sure you have this in your .env file
+    const apiKey = process.env.OPENWEATHERMAP_API_KEY; // 
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
     https.get(url, function(response) {
@@ -39,27 +39,8 @@ app.get('/weather', (req, res) => {
             const longitude = weatherData.coord.lon;
             const imageURL = `https://openweathermap.org/img/wn/${icon}@2x.png`;
 
-            // Now we build our full HTML response
-            // Consider separating HTML building into a different function or use a template engine
-            const fullResponse = `
-                <html>
-                <head>
-                    <title>Weather Report</title>
-                </head>
-                <body style="font-family: Arial, sans-serif; text-align: center; background-color: #e0f2f1; padding: 20px;">
-                    <h1 style="color: #0d47a1;">Weather Forecast</h1>
-                    <h2 style="color: #1a237e;">${city}</h2>
-                    <p style="font-size: 20px;">The temperature is <strong>${temp} degrees Celsius</strong>.</p>
-                    <p style="color: #4a148c; font-size: 18px;">The weather is currently <em>${description}</em>.</p>
-                    <img src="${imageURL}" alt="Weather Icon" style="border: 5px solid #4a148c; border-radius: 10px; margin-top: 10px;">
-                    <!-- Here you could add an <img> tag to include a static map -->
-                    <footer>
-                        <p style="margin-top: 30px; font-size: 12px; color: #424242;">Powered by Kassymova Sabina</p>
-                    </footer>
-                </body>
-                </html>
-            `;
-           // ...inside the https.get callback...
+           
+
 res.json({
     temp: temp,
     description: description,
