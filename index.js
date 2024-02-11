@@ -7,6 +7,9 @@ require('dotenv').config(); // make sure this is at the top
 const app = express();
 const port = 3000;
 
+
+app.set('view engine', 'ejs');
+
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
@@ -17,6 +20,36 @@ app.get('/', (req, res) => {
 });
 
 var city_input 
+
+app.get('/register', (req, res)=>{
+  res.sendFile(path.join(__dirname,'public', 'register.html'));
+})
+
+app.post('/register', async (req, res) => {
+try {
+  const newUser = new User({
+    username: req.body.username,
+    password: req.body.password
+  });
+  await newUser.save();
+  res.redirect('/login');
+} catch (error) {
+  res.status(500).send(error.message);
+}
+});
+
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname,'public', 'login.html'));
+});
+
+app.post('/login', async (req, res) => {
+try {
+  const user = await User.findOne({ username: req.body.username });
+  res.send('Login successful!');
+} catch (error) {
+  res.status(500).send(error.message);
+}
+});
 
 app.get('/weather', (req, res) => {
     const city = req.query.city;
@@ -89,6 +122,7 @@ app.get('/forecast', (req, res) => {
 app.get('/forecast-page', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'forecast.html'));
 });
+
 
 // Start the server
 app.listen(port, () => console.log(`Listening on http://localhost:${port}/`));
