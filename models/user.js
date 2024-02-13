@@ -9,7 +9,6 @@ const userSchema = new mongoose.Schema({
   updatedDate: { type: Date, default: Date.now, required: true},
 });
 
-// Hash password before saving
 userSchema.pre('save', function (next) {
   if (!this.isModified('password')) return next();
 

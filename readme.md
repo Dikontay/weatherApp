@@ -1,11 +1,11 @@
 # WeatherApp
 
-WeatherApp is a simple, user-friendly web application that provides real-time weather forecasts. It allows users to view the current weather conditions and a 10-day forecast for a specified city.
+WeatherApp is a simple, user-friendly web application that provides real-time weather forecasts. It allows users to view the current weather conditions and a weather history.
 
 ## Features
 
 - Real-time weather updates.
-- 10-day weather forecast.
+- User management (login, signup)
 - Easy-to-use interface.
 - Responsive design for various devices.
 
@@ -53,6 +53,21 @@ Enter the name of the city for which you want to check the weather in the input 
 - [Node.js](https://nodejs.org/) - The runtime environment
 - [Express](https://expressjs.com/) - The web application framework
 - [Bootstrap](https://getbootstrap.com/) - The front-end framework
+
+## Check Admin Panel
+
+- username : Dilnaz
+- password : 0402
+
+## API
+- Open Weather Api [https://openweathermap.org/api]
+- Google Maps Api   [https://developers.google.com/maps]
+- Ninja's Api [https://api-ninjas.com]
+- Weather Bit Api [https://www.weatherbit.io]
+
+## Deployment 
+
+[https://node-js-weather-be6f34ba6a41.herokuapp.com/]
 
 
 ## Authors

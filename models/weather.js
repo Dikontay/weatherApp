@@ -7,9 +7,9 @@ const weatherSchema = new mongoose.Schema({
     description: String,
     icon: String,
     date: { type: Date, default: Date.now },
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     lat: Number,
     lon: Number,
+    info: JSON
 });
 
 const Weather = mongoose.model('Weather', weatherSchema);
